@@ -1,342 +1,459 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="Horizon Store – فروشگاه غیرمتمرکز اپلیکیشن و API | امنیت 10/10 | مبتنی بر مرکل و امضای دیجیتال">
-    <title>Horizon Store | فروشگاه مستقل Beaconchain</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>افق فرشته · فروشگاه رسمی</title>
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#0a0f1e" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="افق فرشته" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
+            font-family: 'Inter', sans-serif;
             background: radial-gradient(circle at 10% 20%, #0a0f1e, #03050a);
-            font-family: 'Inter', system-ui, 'Segoe UI', sans-serif;
             color: #eef2ff;
-            padding: 1.5rem;
+            padding: 0.8rem;
+            min-height: 100vh;
         }
-        .container { max-width: 1400px; margin: 0 auto; }
-        .store-header {
-            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
-            gap: 1rem; margin-bottom: 2rem; padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(79,158,255,0.3);
+        .container { max-width: 1200px; margin: 0 auto; }
+        .glass {
+            background: rgba(12, 18, 28, 0.85);
+            backdrop-filter: blur(12px);
+            border-radius: 1.8rem;
+            border: 1px solid rgba(79, 158, 255, 0.2);
+            padding: 1rem 1.2rem;
+            margin-bottom: 1rem;
         }
-        .logo h1 {
-            font-size: 2rem;
-            background: linear-gradient(135deg, #fff, #4f9eff, #c084fc);
-            -webkit-background-clip: text; background-clip: text; color: transparent;
-        }
-        .badge-group { display: flex; gap: 0.8rem; }
+        .flex { display: flex; flex-wrap: wrap; gap: 0.8rem; align-items: center; justify-content: space-between; }
         .badge {
-            background: rgba(79,158,255,0.15);
-            border: 1px solid #4f9eff55;
-            padding: 0.3rem 1rem;
+            background: rgba(79, 158, 255, 0.15);
+            border: 1px solid #4f9eff44;
+            padding: 0.15rem 0.8rem;
             border-radius: 60px;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
+            display: inline-block;
         }
-        .wallet-btn {
+        .badge-green { background: rgba(74, 222, 128, 0.15); border-color: #4ade8055; color: #4ade80; }
+        .badge-gold { background: rgba(251, 191, 36, 0.15); border-color: #facc1555; color: #facc15; }
+        .badge-offline { background: rgba(251, 191, 36, 0.15); border-color: #facc1555; color: #facc15; }
+        .btn {
             background: #4f9eff;
             border: none;
-            padding: 0.6rem 1.5rem;
-            border-radius: 40px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.8rem;
-            margin: 2rem 0;
-        }
-        .product-card {
-            background: rgba(20,24,36,0.7);
-            backdrop-filter: blur(8px);
-            border-radius: 1.5rem;
-            padding: 1.5rem;
-            border: 1px solid rgba(255,255,255,0.08);
-            transition: 0.2s;
-        }
-        .product-card:hover {
-            border-color: #4f9eff;
-            transform: translateY(-5px);
-            background: rgba(28,32,48,0.9);
-        }
-        .price {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: #c084fc;
-        }
-        .buy-btn {
-            background: #2b3550;
-            border: none;
-            padding: 0.6rem;
-            width: 100%;
+            padding: 0.4rem 1.2rem;
             border-radius: 2rem;
-            color: white;
-            font-weight: bold;
-            margin-top: 1rem;
+            font-weight: 600;
+            color: #0a0f1e;
             cursor: pointer;
-        }
-        .glass-card {
-            background: rgba(12,18,28,0.7);
-            backdrop-filter: blur(12px);
-            border-radius: 1.5rem;
-            padding: 1.5rem;
-            border: 1px solid rgba(79,158,255,0.2);
-            margin: 2rem 0;
-        }
-        .footer {
-            margin-top: 3rem;
-            background: rgba(0,0,0,0.4);
-            border-radius: 1rem;
-            padding: 1.5rem;
-            text-align: center;
+            transition: 0.2s;
             font-size: 0.75rem;
         }
-        a { color: #a5b4fc; text-decoration: none; }
-        pre {
-            background: #0f172a;
+        .btn:hover { background: #c084fc; transform: scale(1.02); }
+        .btn-outline { background: transparent; border: 1px solid #4f9eff55; color: #eef2ff; }
+        .btn-outline:hover { background: #4f9eff22; }
+        .btn-success { background: #4ade80; color: #0a0f1e; }
+        .btn-success:hover { background: #22c55e; }
+        .btn-danger { background: #f87171; color: #0a0f1e; }
+        .btn-danger:hover { background: #ef4444; }
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.8rem;
+        }
+        .stat-card {
+            background: rgba(20, 24, 36, 0.5);
+            border-radius: 1rem;
+            padding: 0.6rem 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+        }
+        .stat-card .num { font-size: 1.4rem; font-weight: 800; color: #4f9eff; }
+        .stat-card .label { font-size: 0.6rem; color: #8fa2dc; }
+        .store-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.8rem;
+            margin-top: 0.5rem;
+        }
+        .store-item {
+            background: rgba(20, 24, 36, 0.5);
+            border-radius: 1rem;
             padding: 0.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+            transition: 0.3s;
+        }
+        .store-item:hover { border-color: #4f9eff; transform: translateY(-3px); }
+        .store-item .icon { font-size: 1.8rem; color: #4f9eff; }
+        .store-item .name { font-weight: 600; font-size: 0.85rem; }
+        .store-item .price { color: #c084fc; font-weight: 700; font-size: 0.75rem; }
+        .store-item .status { font-size: 0.55rem; padding: 0.1rem 0.6rem; border-radius: 60px; display: inline-block; margin-top: 0.2rem; }
+        .status-active { background: #4ade8033; color: #4ade80; }
+        .status-inactive { background: #f8717133; color: #f87171; }
+        .log-box {
+            background: #0f172a;
+            border-radius: 1rem;
+            padding: 0.5rem 0.8rem;
+            max-height: 120px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 0.65rem;
+            border: 1px solid #1e2a44;
+        }
+        .log-box .log { padding: 0.1rem 0; border-bottom: 1px solid #1a2238; color: #94a3b8; }
+        .log-box .log .t { color: #4f9eff; margin-left: 0.3rem; }
+        .log-box .log .g { color: #4ade80; }
+        .log-box .log .r { color: #f87171; }
+        .chat-box {
+            background: #0f172a;
+            border-radius: 1rem;
+            padding: 0.6rem 0.8rem;
+            max-height: 180px;
+            overflow-y: auto;
+            border: 1px solid #1e2a44;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+        .chat-box .msg {
+            padding: 0.3rem 0.7rem;
             border-radius: 0.8rem;
+            max-width: 90%;
+            font-size: 0.8rem;
+            line-height: 1.4;
+        }
+        .chat-box .user { align-self: flex-end; background: #4f9eff; color: #0a0f1e; }
+        .chat-box .ai { align-self: flex-start; background: rgba(255,255,255,0.06); color: #e5e7f0; border: 1px solid #2a3a5a; }
+        .chat-row { display: flex; gap: 0.4rem; margin-top: 0.4rem; }
+        .chat-row input {
+            flex: 1;
+            background: #0f172a;
+            border: 1px solid #2a3a5a;
+            border-radius: 2rem;
+            padding: 0.4rem 0.8rem;
+            color: #eef2ff;
+            outline: none;
+            font-size: 0.8rem;
+        }
+        .chat-row input:focus { border-color: #4f9eff; }
+        .chat-row button {
+            background: #4f9eff;
+            border: none;
+            border-radius: 2rem;
+            padding: 0 1rem;
+            font-weight: 600;
+            color: #0a0f1e;
+            cursor: pointer;
+        }
+        .chat-row button:hover { background: #c084fc; }
+        .install-banner {
+            background: rgba(79, 158, 255, 0.1);
+            border: 1px solid #4f9eff44;
+            border-radius: 1rem;
+            padding: 0.6rem 1rem;
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .install-banner.show { display: flex; }
+        .wallet-box {
+            background: #0f172a;
+            border-radius: 1rem;
+            padding: 0.5rem 0.8rem;
+            font-family: monospace;
             font-size: 0.7rem;
-            overflow-x: auto;
+            border: 1px solid #4f9eff55;
+            text-align: center;
+        }
+        @media (max-width: 600px) {
+            body { padding: 0.4rem; }
+            .glass { padding: 0.8rem; }
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <div class="store-header">
-        <div class="logo">
-            <h1>🔭 Horizon Store</h1>
-            <div class="badge-group">
-                <span class="badge"><i class="fas fa-database"></i> Offline‑first</span>
-                <span class="badge"><i class="fas fa-shield-alt"></i> SHA‑256 verified</span>
-                <span class="badge"><i class="fas fa-coins"></i> Merkle licenses</span>
+
+    <!-- HEADER -->
+    <div class="glass">
+        <div class="flex">
+            <div>
+                <h1 style="font-size:1.4rem; background:linear-gradient(135deg,#fff,#4f9eff,#c084fc); -webkit-background-clip:text; background-clip:text; color:transparent;">
+                    <i class="fas fa-store"></i> افق فرشته
+                </h1>
+                <div style="display:flex; gap:0.3rem; flex-wrap:wrap; margin-top:0.2rem;">
+                    <span class="badge"><i class="fas fa-shield-alt"></i> فروشگاه رسمی</span>
+                    <span class="badge badge-green" id="statusBadge"><i class="fas fa-circle"></i> آنلاین</span>
+                    <span class="badge badge-gold"><i class="fas fa-user-tie"></i> Mahdi Amolimoghaddam</span>
+                    <span class="badge" id="onlineStatus"><i class="fas fa-wifi"></i> متصل</span>
+                </div>
+            </div>
+            <div>
+                <button class="btn btn-outline" id="installBtn" style="display:none;"><i class="fas fa-download"></i> نصب</button>
+                <button class="btn btn-outline" id="refreshBtn"><i class="fas fa-sync-alt"></i></button>
             </div>
         </div>
-        <button id="connectBtn" class="wallet-btn"><i class="fas fa-plug"></i> اتصال کیف پول</button>
     </div>
 
-    <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: space-between; margin-bottom: 2rem;">
-        <div><i class="fas fa-check-circle" style="color:#4ade80;"></i> 100k+ Validators (Mock)</div>
-        <div><i class="fas fa-star" style="color:#facc15;"></i> رتبه #3 جهان · امنیت 10/10</div>
-        <div><i class="fas fa-database"></i> کش محلی IndexedDB</div>
-        <div><i class="fas fa-fingerprint"></i> امضای دیجیتال صفحه</div>
+    <!-- INSTALL BANNER -->
+    <div class="glass install-banner" id="installBanner">
+        <span><i class="fas fa-mobile-alt"></i> اپلیکیشن را نصب کنید</span>
+        <button class="btn" id="installBannerBtn">نصب</button>
     </div>
 
-    <div class="products-grid" id="productsContainer"></div>
-
-    <div class="glass-card">
-        <h3><i class="fas fa-link"></i> پرداخت از طریق قرارداد هوشمند (Base / Arbitrum)</h3>
-        <p id="walletStatus" style="font-size:0.8rem;">⏳ کیف پول متصل نیست.</p>
-        <div id="purchasePanel" style="display: none;">
-            <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin: 1rem 0;">
-                <button id="buy100" class="buy-btn" style="width: auto;">خرید ۱۰۰ درخواست – ۰.۰۰۲ ETH</button>
-                <button id="buy1000" class="buy-btn" style="width: auto;">خرید ۱۰۰۰ – ۰.۰۱۵ ETH</button>
-                <button id="buy10000" class="buy-btn" style="width: auto;">خرید ۱۰,۰۰۰ – ۰.۱ ETH</button>
-            </div>
-            <div id="txResult"></div>
-            <pre id="contractNote">⚠️ برای فعال‌سازی واقعی: آدرس قرارداد را در متغیر CONTRACT_ADDRESS وارد کنید.<br>در غیر این‌صورت، خرید به صورت شبیه‌سازی شده کار می‌کند.</pre>
+    <!-- STATS -->
+    <div class="glass">
+        <div class="grid-4">
+            <div class="stat-card"><div class="num" id="totalProducts">۴</div><div class="label">محصولات</div></div>
+            <div class="stat-card"><div class="num" id="activeProducts">۴</div><div class="label">فعال</div></div>
+            <div class="stat-card"><div class="num" id="validatorsCount">۲۴</div><div class="label">ولیدیتور</div></div>
+            <div class="stat-card"><div class="num" id="lastUpdate">—</div><div class="label">آخرین بروزرسانی</div></div>
         </div>
     </div>
 
-    <div class="glass-card">
-        <h3><i class="fas fa-fingerprint"></i> تأیید یکپارچگی فایل (SHA‑256, آفلاین)</h3>
-        <input type="file" id="uploadFile" style="background:#1e293b; border:1px solid #4f9eff; padding:0.5rem; border-radius:1rem; width:100%; margin:1rem 0;">
-        <button id="verifyFileBtn" class="buy-btn" style="background:#2b3550;">محاسبه و تأیید هش</button>
-        <div id="hashOutput" class="badge" style="display:block; margin-top:1rem;"></div>
+    <!-- STORE -->
+    <div class="glass">
+        <h2 style="font-size:1rem;"><i class="fas fa-cubes"></i> محصولات دیجیتال</h2>
+        <div class="store-grid" id="storeGrid"></div>
     </div>
 
-    <div class="footer">
-        <div>© 2026 Mahdi Amolimoghaddam · Horizon Store · بخشی از اکوسیستم مستقل beaconchain‑us</div>
-        <div><a href="https://github.com/beaconchain-us" target="_blank">GitHub</a> | <a href="https://beaconchain.us/dashboard" target="_blank">Validator Dashboard</a> | <a href="mailto:beaconchain@beaconchain.us">Contact</a></div>
+    <!-- WALLET -->
+    <div class="glass">
+        <h2 style="font-size:1rem;"><i class="fas fa-wallet"></i> کیف پول فروشگاه</h2>
+        <div class="wallet-box">
+            <span>آدرس پرداخت (ETH/USDC/BNB):</span><br />
+            <code style="color:#4f9eff;">0x4E94F10F0a34a0DF229e68d5902644046258D678</code>
+        </div>
+    </div>
+
+    <!-- CHAT -->
+    <div class="glass">
+        <h2 style="font-size:1rem;"><i class="fas fa-comment-dots"></i> دستیار فروشگاه</h2>
+        <div class="chat-box" id="chatBox">
+            <div class="msg ai">🤖 سلام! به فروشگاه افق فرشته خوش آمدید.</div>
+            <div class="msg ai">📌 دستورات: «محصولات»، «وضعیت»، «راهنما»</div>
+        </div>
+        <div class="chat-row">
+            <input type="text" id="chatInput" placeholder="دستور خود را بنویسید..." />
+            <button id="chatSend"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <!-- LOGS -->
+    <div class="glass">
+        <h2 style="font-size:1rem;"><i class="fas fa-history"></i> لاگ فعالیت</h2>
+        <div class="log-box" id="logBox">
+            <div class="log"><span class="t">[12:34]</span> 🚀 فروشگاه راه‌اندازی شد.</div>
+        </div>
+        <button class="btn btn-outline" id="clearLogsBtn" style="margin-top:0.3rem; font-size:0.7rem;"><i class="fas fa-eraser"></i> پاک کردن لاگ</button>
+    </div>
+
+    <div style="text-align:center; font-size:0.6rem; color:#6c7b9e; padding:0.8rem 0;">
+        © ۲۰۲۶ Horizon Angel · نظارت: Mahdi Amolimoghaddam
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
 <script>
-    const products = [
-        { name: "Basic API Pack", volume: 100, priceEth: 0.002, icon: "fa-bolt" },
-        { name: "Pro API Pack", volume: 1000, priceEth: 0.015, icon: "fa-rocket" },
-        { name: "Enterprise Pack", volume: 10000, priceEth: 0.1, icon: "fa-crown" }
-    ];
+// =============================================================
+// افق فرشته · فروشگاه PWA
+// =============================================================
 
-    function renderProducts() {
-        const container = document.getElementById('productsContainer');
-        container.innerHTML = products.map(p => `
-            <div class="product-card">
-                <i class="fas ${p.icon}" style="font-size:2rem; color:#4f9eff;"></i>
-                <h3>${p.name}</h3>
-                <p>${p.volume.toLocaleString()} درخواست</p>
-                <div class="price">${p.priceEth} ETH</div>
-                <button class="buy-product-btn" data-volume="${p.volume}" data-price="${p.priceEth}">خرید بسته</button>
-            </div>
-        `).join('');
-        document.querySelectorAll('.buy-product-btn').forEach(btn => {
-            btn.addEventListener('click', async () => {
-                const volume = parseInt(btn.dataset.volume);
-                const price = parseFloat(btn.dataset.price);
-                await buyPackage(volume, price);
-            });
+// ---------- محصولات ----------
+let products = [
+    { id: 1, name: 'قالب کسب‌وکار', price: '۰.۰۵ ETH', icon: 'fa-laptop-code', active: true },
+    { id: 2, name: 'قالب فروشگاهی', price: '۰.۰۸ ETH', icon: 'fa-store', active: true },
+    { id: 3, name: 'قالب شخصی', price: '۰.۰۳ ETH', icon: 'fa-user-tie', active: true },
+    { id: 4, name: 'لایسنس ولیدیتور', price: '۰.۰۰۲ ETH/ماه', icon: 'fa-shield-alt', active: true }
+];
+
+// ---------- توابع ----------
+const logBox = document.getElementById('logBox');
+const chatBox = document.getElementById('chatBox');
+
+function addLog(msg, type='info') {
+    const time = new Date().toLocaleTimeString('fa-IR');
+    const cls = type==='success'?'g':(type==='error'?'r':'');
+    const entry = document.createElement('div');
+    entry.className = 'log';
+    entry.innerHTML = `<span class="t">[${time}]</span> <span class="${cls}">${msg}</span>`;
+    logBox.appendChild(entry);
+    logBox.scrollTop = logBox.scrollHeight;
+}
+
+function addChat(msg, sender='ai') {
+    const div = document.createElement('div');
+    div.className = `msg ${sender}`;
+    div.textContent = msg;
+    chatBox.appendChild(div);
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+function renderStore() {
+    const grid = document.getElementById('storeGrid');
+    grid.innerHTML = products.map(p => `
+        <div class="store-item">
+            <div class="icon"><i class="fas ${p.icon}"></i></div>
+            <div class="name">${p.name}</div>
+            <div class="price">${p.price}</div>
+            <span class="status ${p.active ? 'status-active' : 'status-inactive'}">
+                ${p.active ? '✅ فعال' : '❌ غیرفعال'}
+            </span>
+            <button class="btn ${p.active ? 'btn-danger' : 'btn-success'} toggle-product" data-id="${p.id}" style="margin-top:0.3rem; font-size:0.6rem;">
+                ${p.active ? 'غیرفعال‌سازی' : 'فعال‌سازی'}
+            </button>
+        </div>
+    `).join('');
+
+    document.querySelectorAll('.toggle-product').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const id = parseInt(this.dataset.id);
+            toggleProduct(id);
+        });
+    });
+}
+
+function toggleProduct(id) {
+    const product = products.find(p => p.id === id);
+    if (!product) return;
+    const newStatus = !product.active;
+    addLog(`🔄 ${newStatus ? 'فعال‌سازی' : 'غیرفعال‌سازی'} ${product.name}...`, 'info');
+    setTimeout(() => {
+        product.active = newStatus;
+        renderStore();
+        updateStats();
+        addLog(`✅ ${product.name} ${newStatus ? 'فعال' : 'غیرفعال'} شد.`, 'success');
+        addChat(`✅ ${product.name} ${newStatus ? 'فعال' : 'غیرفعال'} شد.`, 'ai');
+    }, 600);
+}
+
+function updateStats() {
+    document.getElementById('activeProducts').textContent = products.filter(p => p.active).length;
+    document.getElementById('totalProducts').textContent = products.length;
+    document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString('fa-IR');
+}
+
+// ---------- پردازش دستورات ----------
+function processCommand(text) {
+    const lower = text.toLowerCase();
+    
+    if (lower.includes('محصولات')) {
+        const active = products.filter(p => p.active).length;
+        addChat(`📦 ${products.length} محصول موجود، ${active} عدد فعال`, 'ai');
+        addLog('📦 لیست محصولات نمایش داده شد.', 'info');
+        return;
+    }
+    
+    if (lower.includes('وضعیت')) {
+        addChat(`📊 ${products.length} محصول، ${products.filter(p=>p.active).length} فعال، ۲۴ ولیدیتور`, 'ai');
+        addLog('📊 وضعیت نمایش داده شد.', 'info');
+        return;
+    }
+    
+    if (lower.includes('راهنما') || lower.includes('help')) {
+        addChat(`📋 دستورات: محصولات، وضعیت، راهنما`, 'ai');
+        return;
+    }
+    
+    if (lower.includes('سلام')) {
+        addChat('👋 سلام! به فروشگاه افق فرشته خوش آمدید.', 'ai');
+        return;
+    }
+    
+    addChat(`❌ دستور "${text}" شناسایی نشد. گزینه‌ها: محصولات، وضعیت، راهنما`, 'ai');
+}
+
+// ---------- رویدادها ----------
+const chatInput = document.getElementById('chatInput');
+const chatSend = document.getElementById('chatSend');
+
+chatSend.addEventListener('click', () => {
+    const text = chatInput.value.trim();
+    if (!text) return;
+    addChat(text, 'user');
+    chatInput.value = '';
+    processCommand(text);
+});
+
+chatInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') chatSend.click();
+});
+
+document.getElementById('refreshBtn').addEventListener('click', () => {
+    addLog('🔄 بروزرسانی...', 'info');
+    setTimeout(() => {
+        updateStats();
+        addLog('✅ بروزرسانی شد.', 'success');
+    }, 400);
+});
+
+document.getElementById('clearLogsBtn').addEventListener('click', () => {
+    logBox.innerHTML = '';
+    addLog('🧹 لاگ‌ها پاک شدند.', 'warning');
+});
+
+// ---------- PWA نصب ----------
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    document.getElementById('installBanner').classList.add('show');
+    document.getElementById('installBtn').style.display = 'inline-block';
+});
+
+document.getElementById('installBannerBtn').addEventListener('click', () => {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choice) => {
+            if (choice.outcome === 'accepted') {
+                addLog('✅ PWA نصب شد.', 'success');
+                addChat('✅ اپلیکیشن با موفقیت نصب شد.', 'ai');
+            } else {
+                addLog('❌ نصب PWA رد شد.', 'warning');
+            }
+            deferredPrompt = null;
+            document.getElementById('installBanner').classList.remove('show');
+            document.getElementById('installBtn').style.display = 'none';
         });
     }
+});
 
-    let provider, signer, userAddress = null;
-    let contract = null;
-    const CONTRACT_ADDRESS = "0x0000000000000000000000000000000000000000";
-    const CONTRACT_ABI = [
-        "function purchasePackage(uint256 volume, bytes32 root) external payable",
-        "event PackagePurchased(address indexed buyer, uint256 volume, bytes32 root)"
-    ];
+document.getElementById('installBtn').addEventListener('click', () => {
+    document.getElementById('installBannerBtn').click();
+});
 
-    async function connectWallet() {
-        if (!window.ethereum) {
-            alert('لطفاً متامسک یا کیف پول Web3 نصب کنید.');
-            return;
-        }
-        try {
-            provider = new ethers.providers.Web3Provider(window.ethereum);
-            await provider.send("eth_requestAccounts", []);
-            signer = provider.getSigner();
-            userAddress = await signer.getAddress();
-            document.getElementById('walletStatus').innerHTML = `✅ کیف پول متصل: ${userAddress.slice(0,6)}...${userAddress.slice(-4)}`;
-            document.getElementById('purchasePanel').style.display = 'block';
-            if (CONTRACT_ADDRESS && CONTRACT_ADDRESS !== "0x0000000000000000000000000000000000000000") {
-                contract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
-                document.getElementById('contractNote').innerHTML = '✅ قرارداد هوشمند فعال است. تراکنش‌ها واقعی روی بلاکچین انجام می‌شوند.';
-            } else {
-                document.getElementById('contractNote').innerHTML = '⚠️ حالت شبیه‌سازی (دمو). برای حالت واقعی، آدرس قرارداد را در کد وارد کنید.';
-            }
-        } catch(e) {
-            console.error(e);
-            alert('خطا در اتصال کیف پول');
-        }
+// ---------- وضعیت آفلاین ----------
+function updateOnlineStatus() {
+    const el = document.getElementById('onlineStatus');
+    if (navigator.onLine) {
+        el.innerHTML = '<i class="fas fa-wifi"></i> متصل';
+        el.className = 'badge';
+    } else {
+        el.innerHTML = '<i class="fas fa-wifi-slash"></i> آفلاین';
+        el.className = 'badge badge-offline';
     }
+}
+window.addEventListener('online', updateOnlineStatus);
+window.addEventListener('offline', updateOnlineStatus);
+updateOnlineStatus();
 
-    async function buyPackage(volume, priceEth) {
-        if (!userAddress) {
-            await connectWallet();
-            if (!userAddress) return;
-        }
-        const resultDiv = document.getElementById('txResult');
-        resultDiv.innerHTML = '🔄 ارسال تراکنش به شبکه...';
-        try {
-            const mockRoot = "0x" + Array(64).fill(0).map(() => Math.floor(Math.random()*16).toString(16)).join('');
-            if (contract && CONTRACT_ADDRESS !== "0x0000000000000000000000000000000000000000") {
-                const priceWei = ethers.utils.parseEther(priceEth.toString());
-                const tx = await contract.purchasePackage(volume, mockRoot, { value: priceWei });
-                await tx.wait();
-                resultDiv.innerHTML = `✅ خرید با موفقیت ثبت شد! حجم: ${volume} درخواست. ریشه: ${mockRoot.slice(0,20)}...`;
-            } else {
-                resultDiv.innerHTML = `✅ [دمو] خرید ${volume} درخواست با ${priceEth} ETH انجام شد. (بدون تراکنش واقعی)`;
-            }
-        } catch(err) {
-            resultDiv.innerHTML = `❌ خطا: ${err.message}`;
-        }
-    }
+// ---------- ثبت Service Worker ----------
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js')
+        .then(() => console.log('✅ Service Worker ثبت شد.'))
+        .catch(() => console.log('⚠️ Service Worker ثبت نشد.'));
+}
 
-    class PrepaidPackage {
-        constructor(volume, seed = crypto.getRandomValues(new Uint8Array(32))) {
-            this.volume = volume;
-            this.seed = seed;
-            this.leaves = null;
-            this.root = null;
-        }
-        async _sha256(data) {
-            const hash = await crypto.subtle.digest('SHA-256', data);
-            return new Uint8Array(hash);
-        }
-        async generate() {
-            const leaves = [];
-            for (let i = 0; i < this.volume; i++) {
-                const indexBuf = new Uint8Array(4);
-                new DataView(indexBuf.buffer).setUint32(0, i, true);
-                const concat = new Uint8Array(this.seed.length + indexBuf.length);
-                concat.set(this.seed, 0);
-                concat.set(indexBuf, this.seed.length);
-                const leaf = await this._sha256(concat);
-                leaves.push(leaf);
-            }
-            this.leaves = leaves;
-            let level = leaves;
-            while (level.length > 1) {
-                const next = [];
-                for (let i = 0; i < level.length; i += 2) {
-                    const left = level[i];
-                    const right = (i+1 < level.length) ? level[i+1] : left;
-                    const concat = new Uint8Array(left.length + right.length);
-                    concat.set(left, 0);
-                    concat.set(right, left.length);
-                    next.push(await this._sha256(concat));
-                }
-                level = next;
-            }
-            this.root = level[0] || new Uint8Array(32);
-            return this.root;
-        }
-        async getProof(index) {
-            if (!this.leaves) throw new Error('generate first');
-            let proof = [];
-            let level = this.leaves.slice();
-            let idx = index;
-            while (level.length > 1) {
-                const siblingIdx = (idx % 2 === 0) ? idx + 1 : idx - 1;
-                if (siblingIdx < level.length) proof.push(level[siblingIdx]);
-                else proof.push(level[idx]);
-                const next = [];
-                for (let i = 0; i < level.length; i += 2) {
-                    const left = level[i];
-                    const right = (i+1 < level.length) ? level[i+1] : left;
-                    const concat = new Uint8Array(left.length + right.length);
-                    concat.set(left, 0);
-                    concat.set(right, left.length);
-                    next.push(await this._sha256(concat));
-                }
-                level = next;
-                idx = Math.floor(idx / 2);
-            }
-            return { leaf: this.leaves[index], proof, index };
-        }
-    }
-
-    async function computeHash(file) {
-        const buf = await file.arrayBuffer();
-        const hash = await crypto.subtle.digest('SHA-256', buf);
-        return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2,'0')).join('');
-    }
-
-    document.getElementById('verifyFileBtn')?.addEventListener('click', async () => {
-        const input = document.getElementById('uploadFile');
-        const file = input.files[0];
-        const out = document.getElementById('hashOutput');
-        if (!file) { out.innerHTML = '⚠️ فایلی انتخاب نشده.'; return; }
-        out.innerHTML = '⏳ محاسبه هش...';
-        const hash = await computeHash(file);
-        out.innerHTML = `🔐 SHA‑256: ${hash}<br>✅ با هش کاتالوگ مقایسه کنید (تأیید اصالت آفلاین).`;
-    });
-
-    async function addPageFingerprint() {
-        const mainContent = document.body.innerText || document.body.textContent;
-        const enc = new TextEncoder().encode(mainContent.slice(0, 5000));
-        const hashBuf = await crypto.subtle.digest('SHA-256', enc);
-        const hashHex = Array.from(new Uint8Array(hashBuf)).map(b=>b.toString(16).padStart(2,'0')).join('');
-        const fpDiv = document.createElement('div');
-        fpDiv.style.fontSize = '0.65rem';
-        fpDiv.style.marginTop = '1rem';
-        fpDiv.style.textAlign = 'center';
-        fpDiv.style.opacity = '0.6';
-        fpDiv.innerHTML = `🔏 امضای دیجیتال صفحه (SHA‑256): ${hashHex.slice(0,32)}…`;
-        document.querySelector('.footer').appendChild(fpDiv);
-    }
-
-    window.addEventListener('load', () => {
-        renderProducts();
-        document.getElementById('connectBtn')?.addEventListener('click', connectWallet);
-        addPageFingerprint();
-        document.getElementById('buy100')?.addEventListener('click', () => buyPackage(100, 0.002));
-        document.getElementById('buy1000')?.addEventListener('click', () => buyPackage(1000, 0.015));
-        document.getElementById('buy10000')?.addEventListener('click', () => buyPackage(10000, 0.1));
-    });
+// ---------- بارگذاری ----------
+renderStore();
+updateStats();
+addLog('🌟 فروشگاه افق فرشته راه‌اندازی شد.', 'success');
+addChat('🌟 به فروشگاه خوش آمدید!', 'ai');
 </script>
 </body>
 </html>

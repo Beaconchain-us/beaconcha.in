@@ -1,29 +1,22 @@
 {
-  "name": "Horizon Hub Marketplace",
-  "short_name": "Horizon Hub",
-  "description": "A decentralized marketplace for jobs, digital products, and freelance services.",
-  "start_url": "/index.html?utm_source=homescreen",
+  "name": "افق فرشته · فروشگاه رسمی",
+  "short_name": "افق فرشته",
+  "description": "فروشگاه غیرمتمرکز Horizon Angel",
+  "start_url": "/",
   "display": "standalone",
-  "theme_color": "#2c3e50",
-  "background_color": "#ffffff",
-  "orientation": "portrait-primary",
+  "orientation": "portrait",
+  "background_color": "#0a0f1e",
+  "theme_color": "#0a0f1e",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "logo-192.png",
-      "type": "image/png",
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌹</text></svg>",
       "sizes": "192x192",
-      "purpose": "any maskable"
+      "type": "image/svg+xml"
     },
     {
-      "src": "logo-512.png",
-      "type": "image/png",
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌹</text></svg>",
       "sizes": "512x512",
-      "purpose": "any maskable"
+      "type": "image/svg+xml"
     }
   ]
 }

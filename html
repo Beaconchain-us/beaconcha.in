@@ -1,171 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Horizon Web App – Offline‑first validator monitoring. No app stores, pure web + PWA + API monetization.">
-  <title>Horizon Web App · No Stores · PWA + APK</title>
-  <!-- Manifest for PWA -->
-  <link rel="manifest" href="data:application/manifest+json,{ 
-    \"name\": \"Horizon Web App\", 
-    \"short_name\": \"Horizon\", 
-    \"start_url\": \".\", 
-    \"display\": \"standalone\", 
-    \"theme_color\": \"#0a0f1e\", 
-    \"background_color\": \"#03050a\", 
-    \"icons\": [{ \"src\": \"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%234f9eff'/%3E%3Ctext x='50' y='67' text-anchor='middle' fill='white' font-size='50' font-family='monospace'%3EH%3C/text%3E%3C/svg%3E\", \"sizes\": \"any\", \"type\": \"image/svg+xml\" }] 
-  }">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background: radial-gradient(circle at 10% 20%, #0a0f1e, #03050a);
-      font-family: 'Segoe UI', 'Inter', system-ui, sans-serif;
-      color: #eef2ff;
-      padding: 1rem;
-    }
-    .container { max-width: 1200px; margin: 0 auto; }
-    .header { text-align: center; margin-bottom: 2rem; }
-    .header h1 { font-size: 2rem; background: linear-gradient(135deg, #fff, #4f9eff, #c084fc); -webkit-background-clip: text; background-clip: text; color: transparent; }
-    .card {
-      background: rgba(20,24,36,0.7);
-      backdrop-filter: blur(12px);
-      border-radius: 1.5rem;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      border: 1px solid rgba(79,158,255,0.2);
-    }
-    .badge-group { display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: center; margin: 1rem 0; }
-    .badge { background: rgba(79,158,255,0.15); border: 1px solid #4f9eff; padding: 0.3rem 1rem; border-radius: 60px; font-size: 0.7rem; }
-    .install-section { background: #1e293b; border-radius: 1rem; padding: 1rem; text-align: center; margin-top: 1rem; }
-    button { background: #4f9eff; border: none; padding: 0.6rem 1.2rem; border-radius: 2rem; font-weight: bold; cursor: pointer; margin-top: 0.5rem; }
-    .wallet-box { background: #0b0e1a; border-radius: 1rem; padding: 1rem; font-family: monospace; word-break: break-all; border: 1px solid #4f9eff; margin: 1rem 0; }
-    .plans { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 1rem; }
-    .plan { background: #0f172a; border-radius: 1rem; padding: 1rem; text-align: center; flex: 1; min-width: 150px; }
-    .price { font-size: 1.3rem; font-weight: bold; color: #c084fc; }
-    .footer { text-align: center; font-size: 0.7rem; margin-top: 2rem; color: #6c7b9e; }
-    a { color: #4f9eff; text-decoration: none; }
-    hr { margin: 1rem 0; border-color: #2d3a5e; }
-    @media (max-width: 700px) { .card { padding: 1rem; } .plan { min-width: 120px; } }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Horizon Hub Marketplace – decentralized marketplace for jobs, digital products, and freelance services.">
+    <meta name="theme-color" content="#0f172a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="logo-192.png">
+    <title>Horizon Hub Marketplace</title>
+    <!-- Your existing CSS links go here -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="container">
-  <div class="header">
-    <h1>🔭 Horizon Web App</h1>
-    <p>No app stores • Pure web • Installable • Offline‑first</p>
-    <div class="badge-group">
-      <div class="badge">✅ 100% Web / PWA</div>
-      <div class="badge">🔒 Security 10/10</div>
-      <div class="badge">📴 Offline‑ready</div>
-      <div class="badge">🌍 World #3</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>✨ Validator Dashboard (live mock)</h2>
-    <p>Real‑time status, balance, rewards – works without internet after first load.</p>
-    <div style="background:#0f172a; border-radius:1rem; padding:1rem; margin-top:1rem;">
-      <div>🟢 Validator #12345 – <strong>Active</strong> | Balance: 32.45 ETH</div>
-      <div>🟡 Validator #67890 – <strong>Pending</strong> | Balance: 32.00 ETH</div>
-      <div>🔴 Validator #11121 – <strong>Offline</strong> | Balance: 31.90 ETH</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>📱 Install as PWA (no store required)</h2>
-    <p>Add Horizon to your home screen – works like a native app, updates automatically.</p>
-    <div class="install-section">
-      <strong>🌐 On Android / Chrome:</strong> Tap the menu (⋮) → "Install app" / "Add to Home screen".<br>
-      <strong>🍏 On iOS / Safari:</strong> Tap Share icon → "Add to Home Screen".<br>
-      <button id="installBtn">📲 Simulate Install Prompt</button>
-      <p style="font-size:0.7rem; margin-top:0.5rem;">(This browser may show a native install prompt if PWA is supported)</p>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>⬇️ Direct APK (for Android enthusiasts)</h2>
-    <p>Download the standalone Android package – no Google Play needed.</p>
-    <a href="#" style="display:inline-block; background:#2b3550; padding:0.5rem 1rem; border-radius:2rem; margin-top:0.5rem;">📦 Download APK (v2.0.0)</a>
-    <p style="font-size:0.7rem; margin-top:0.5rem;">⚠️ Enable "Install from unknown sources" in settings.</p>
-  </div>
-
-  <!-- ========== NEW MONETIZATION SECTION ========== -->
-  <div class="card" style="border: 1px solid #c084fc;">
-    <h2><i class="fas fa-coins"></i> 💰 Support Horizon – API Monetization</h2>
-    <p>Help us maintain independent infrastructure. Purchase API access or send a direct donation.</p>
-    
-    <div class="wallet-box">
-      <span style="font-size:0.8rem;">📡 Wallet (ETH / USDC / BNB):</span><br>
-      <code style="font-size:1rem;">0x4E94F10F0a34a0DF229e68d5902644046258D678</code>
+    <!-- Your existing HTML content goes here -->
+    <div id="app">
+        <h1>Horizon Hub Marketplace</h1>
+        <!-- Rest of your content -->
     </div>
 
-    <h3>📦 Prepaid API Packages (Merkle‑based)</h3>
-    <div class="plans">
-      <div class="plan">
-        <h4>Basic</h4>
-        <p>100 requests/day</p>
-        <div class="price">0.05 ETH</div>
-        <p>per month</p>
-      </div>
-      <div class="plan">
-        <h4>Pro</h4>
-        <p>5,000 requests/day</p>
-        <div class="price">0.2 ETH</div>
-        <p>per month</p>
-      </div>
-      <div class="plan">
-        <h4>Enterprise</h4>
-        <p>Unlimited + SLA</p>
-        <div class="price">0.5 ETH</div>
-        <p>per month</p>
-      </div>
-    </div>
-    <p style="font-size:0.7rem; margin-top:0.5rem;">🔐 After payment, email <strong>beaconchain@beaconchain.us</strong> with your wallet address to receive API credentials.</p>
-    <hr>
-    <div style="text-align:center;">
-      <button id="donateBtn">💎 Donate with Wallet</button>
-      <p style="font-size:0.7rem; margin-top:0.5rem;">(Opens your Web3 wallet – or copy address above)</p>
-    </div>
-  </div>
+    <!-- ============================================================
+    SERVICE WORKER REGISTRATION
+    ============================================================ -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('✅ Service Worker registered successfully:', registration);
+                    })
+                    .catch(error => {
+                        console.warn('❌ Service Worker registration failed:', error);
+                    });
+            });
+        } else {
+            console.warn('⚠️ Service Workers are not supported in this browser.');
+        }
+    </script>
 
-  <div class="footer">
-    © 2026 Horizon – Built from Mashhad, Iran. No app stores, no tracking, fully open source.<br>
-    <a href="https://github.com/Beaconchain-us">GitHub</a> | <a href="#" id="refreshBtn">⟳ Check for updates (PWA)</a>
-  </div>
-</div>
-
-<script>
-  // PWA install prompt simulation
-  let deferredPrompt;
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    document.getElementById('installBtn').style.display = 'inline-block';
-  });
-  document.getElementById('installBtn')?.addEventListener('click', () => {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then(() => deferredPrompt = null);
-    } else {
-      alert('Install prompt not available now. Use browser menu to add to home screen.');
-    }
-  });
-  // Simple donate button: copy wallet address or try to open metamask
-  document.getElementById('donateBtn')?.addEventListener('click', () => {
-    const wallet = '0x4E94F10F0a34a0DF229e68d5902644046258D678';
-    if (window.ethereum) {
-      // request to send transaction (simplified)
-      alert(`Please send ETH/USDC to:\n${wallet}\n\nYour wallet will open soon.`);
-      // optional: try to open metamask with a transaction
-    } else {
-      navigator.clipboard.writeText(wallet);
-      alert(`Wallet address copied to clipboard:\n${wallet}`);
-    }
-  });
-  // offline hint
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js').catch(() => console.log('SW not registered (demo)'));
-  }
-</script>
+    <!-- Your existing JavaScript files go here -->
+    <script src="app.js"></script>
 </body>
 </html>
